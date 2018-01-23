@@ -36,6 +36,8 @@ That's it!
 
 ## See your messages in Sigfox Backend
 
+![backend device list](screenshots/backend-device-list.png)
+
 Now go to [Sigfox Backend](https://backend.sigfox.com) and login with the credentials you've been given.
 Click on the device menu and select your device.
 
@@ -63,26 +65,22 @@ Deploy an instance on your Heroku account to play around with it!
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/sigfox-platform/)
 
-An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/sigfox-platform/) and follow these steps:
 
-```
-git clone https://github.com/luisomoreau/sigfox-platform.git my-project
-cd my-project
-heroku apps:create my-project
-git push heroku master
-```
-
-If you are not familiar with Heroku, just create an account an follow the procedure:
+If you are not familiar with Heroku, just create an account and follow the procedure:
 
 1. **Create a new app:**
 
+Choose the name you want and the region does not really matter for this testing purpose.
+
 ![create app](screenshots/deploy-1.png)
+
+Click then on deploy app.
 
 2. **Build & deploy app:**
 
 ![build app](screenshots/deploy-2.png)
 
-3. **(Optional) Link the application with a MongoDB MLab database (Free):**
+3. **Link the application with a MongoDB MLab database (Free):**
 
 *Note that if you don't link a database to your application, all the data will be erased every time the application restarts.*
 
@@ -120,7 +118,7 @@ If you are not familiar with Heroku, just create an account an follow the proced
 
 ![heroku-show-env-variables](screenshots/heroku-show-env-variables.png)
 
-* Click on Reveal Config Vars and add your MongoDB URI:
+* Click on Reveal Config Vars and add your MongoDB URI (Don't forget to replace your username and password):
 
 ![heroku-add-MONGODB_URI](screenshots/heroku-add-MONGODB_URI.png)
 
