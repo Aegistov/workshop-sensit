@@ -453,6 +453,8 @@ var payload = "12345aefd"
 ```
 To parse a string of characters in hexadecimal, you need to user the parseInt function. First parameter being your string and the second one being the base (16).
 
+If the 4th byte is equal to zero then alert is to false else, it is true.
+
 Add your custom piece of code in the following previous code.
 Look for:
 
@@ -464,6 +466,7 @@ if (mode === 'Door' || mode === 'Move' || mode === 'Reed switch'){
 }  
 
 ```
+
 
 
 Now go to Device and click on edit:
