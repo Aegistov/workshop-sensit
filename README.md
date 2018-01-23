@@ -129,7 +129,7 @@ Click then on deploy app.
 
 ### User guide
 
-- Open app and register:
+- Click on the Open app button and register:
 
 ![login](screenshots/login.png)
 
@@ -162,17 +162,18 @@ Create a new callback:
 
 ![new-callback](screenshots/new-callback.png)
 
-Copy past the information provided in the platform:
+Fill the sigfox backend callback information using using the instructions from the Heroku app:
 
 ![uplink-callback](screenshots/connector-create-uplink-callback.png)
 
 ![backend-uplink-callback](screenshots/uplink-callback.png)
+Submit
 
-Send a Sigfox message again with your device and view it on the platform:
+Use your device to send a Sigfox message again (double click on the buttonog device and view it on the platform:
 
 ![overview-first-message](screenshots/overview-first-message.png)
 
-Add another callback to use the Sigfox geolocation service:
+Add another callback in the Sigfox backend to use the Sigfox geolocation service:
 
 ![geoloc-callback](screenshots/connector-create-geoloc-callback.png)
 
@@ -211,27 +212,6 @@ obj.type = ; //(string) a type (string, number, boolean)
 obj.unit = ; //(string) a unit or none ('°C', '%', '')
 ```
 
-If the payload cointains geolocation you have to store a special object with the 'geoloc' key. Below is an example for GPS coordinates:
-
-```javascript
-obj.key = 'geoloc';
-obj.value = 'GPS';
-obj.type = 'string';
-obj.unit = '';
-parsedData.push(obj);
-obj = {};
-obj.key = 'lat';
-obj.value = 48.858093;
-obj.type = 'number';
-obj.unit = '';
-parsedData.push(obj);
-obj = {};
-obj.key = 'lng';
-obj.value = 2.294694;
-obj.type = 'number';
-obj.unit = '';
-parsedData.push(obj);
-```
 
 ### Example
 ```javascript
@@ -268,6 +248,8 @@ If the hexadecimal payload is '11'.
   }
 ]
 ```
+
+## Your turn to code!
 
 Now let's try to decode the Sensit payload.
 Here you will find the payload description:
