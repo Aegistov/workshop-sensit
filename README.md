@@ -54,12 +54,7 @@ The next step will be to deploy an open source platform to see and use this Sigf
 
 ## Sigfox Platform
 
-
-### Option 1: Test with the demo application
-
-[Demo](https://sigfox-platform.thenorthweb.com)
-
-### Option 2: Deploy your own instance with [Heroku](https://heroku.com)
+### Deploy your own instance with [Heroku](https://heroku.com)
 
 Deploy an instance on your Heroku account to play around with it!
 
@@ -254,6 +249,11 @@ Here you will find the payload description:
 To simplify the task, you will only need to decode the light, the temperature and humidity.
 Here is the base parser:
 
+Go back on the platform and add a parser to decode the Sigfox Payload:
+
+![add-parser](screenshots/add-parser.png)
+
+
 Copy paste the following code into the new parser:
 ```
 var payload,
@@ -341,23 +341,46 @@ battery = (parseInt(battery, 2) * 0.05 + 2.7).toFixed(2);
 
 // Temperature & Humidity
 if (mode === 'Temperature & Humidity') {
+    // Byte #2
+    var byte = parseInt(payload.slice(2, 4), 16).toString(2);
+    while (byte.length < 8)
+        byte = '0' + byte;
+    temperature = byte.slice(0, 4);
+    // Byte #3
+    var byte = parseInt(payload.slice(4, 6), 16).toString(2);
+    while (byte.length < 8)
+        byte = '0' + byte;
+    temperature += byte.slice(2, 8);
+    temperature = ((parseInt(temperature, 2) - 200) / 8).toFixed(2);
 
-  //Try to decode the temperature and the humidity here!
-  temperature = 0;
-  humidity = 0;
-
+    if (type !== 'Button')
+    // Byte #4
+        humidity = parseInt(payload.slice(6, 8), 16) * 0.5;
+    else {
+        // Byte #4
+        var byte = parseInt(payload.slice(6, 8), 16).toString(2);
+        while (byte.length < 8)
+            byte = '0' + byte;
+        firmwareVersion = parseInt(byte.slice(0, 3), 2) + '.' + parseInt(byte.slice(4, 8), 2);
+    }
 }
 
 // Light
 if (mode === 'Light') {
-    //Try to decode the light here!
-    light = 0;
+    // Byte #3
+    var byte = parseInt(payload.slice(4, 6), 16).toString(2);
+    while (byte.length < 8)
+        byte = '0' + byte;
+    var multiplier = parseInt(byte.slice(0, 2), 2) * 8;
+    light = parseInt(byte.slice(2, 8), 2);
+    light = multiplier * light * 0.01;
 }
 
 // Alert (Door - Move - Reed switch)
-if (mode === 'Door' || mode === 'Move' || mode === 'Reed switch')
-// Byte #4
-    alert = parseInt(payload.slice(6, 8), 16) === 0 ? false : true;
+if (mode === 'Door' || mode === 'Move' || mode === 'Reed switch'){
+// Hint: on Byte #4
+
+  }
 
 
 // Store objects in parsedData array
@@ -419,6 +442,29 @@ parsedData.push(obj);
 //console.log(parsedData);
 return parsedData;
 ```
+
+This code does not include the alerts.
+
+Here are few things for you to understand if you want decode the alerts:
+
+- The Sigfox payload is a string of hexadecimal characters:
+```
+var payload = "12345aefd"
+```
+To parse a string of characters in hexadecimal, you need to user the parseInt function. First parameter being your string and the second one being the base (16).
+
+Add your custom piece of code in the following previous code.
+Look for:
+
+```
+// Alert (Door - Move - Reed switch)
+if (mode === 'Door' || mode === 'Move' || mode === 'Reed switch'){
+// PUT YOUR CODE HERE
+
+}  
+
+```
+
 
 Now go to Device and click on edit:
 
