@@ -20,7 +20,7 @@ The different steps will be:
 ## Send you first Sigfox message
 
 You've been provided a Sensit.
-![Sensit](screenshots/sensit-2.jpeg)
+![Sensit](screenshots/sensit-2.png)
 This is a Sigfox device that include multiple sensors:
 - Temperature sensor
 - Humidity sensor
