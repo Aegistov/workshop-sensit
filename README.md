@@ -183,10 +183,6 @@ The Geolocation information may take up to 10 seconds to arrive. This is the nec
 
 ## Decode Sigfox Payload
 
-Go back on the platform and add a parser to decode the Sigfox Payload:
-
-![add-parser](screenshots/add-parser.png)
-
 **Let's focus on how to add your new parser in order to decode custom payloads.**
 
 You must respect a particular nomenclature such as the payload variable name, the geolocation structure _(if any)_ and the result of the function you will write.
@@ -253,7 +249,7 @@ If the hexadecimal payload is '11'.
 
 Now let's try to decode the Sensit payload.
 Here you will find the payload description:
-[Sensit payload description](screenshots/Sensit-Payload-Decoding-Guide.pdt)
+[Sensit payload description](screenshots/Sensit-Payload-Decoding-Guide.pdf)
 
 To simplify the task, you will only need to decode the light, the temperature and humidity.
 Here is the base parser:
